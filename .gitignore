@@ -4,3 +4,6 @@
 target/
 node_modules/
 .DS_Store
+*.pem
+application-local.*
+.junie

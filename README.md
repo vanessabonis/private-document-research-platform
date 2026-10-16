@@ -48,11 +48,11 @@ The scope, sprints and checklist are in [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN
 
 | Sprint | Dates | Goal |
 |---|---|---|
-| Sprint 1 | Oct 1 to 7 | Ingest a document and find it through the database |
-| Sprint 2 | Oct 8 to 14 | Ask a question and get a cited answer through the API |
-| Sprint 3 | Oct 15 to 21 | Nothing leaves the machine without passing the privacy gate; analyze a document |
-| Sprint 4 | Oct 22 to 28 | Usable in a browser, with measured quality |
-| Launch | Oct 29 to 31 | Security fixes, docs, deploy guide |
+| Sprint 1 |  | Ingest a document and find it through the database |
+| Sprint 2 |  | Ask a question and get a cited answer through the API |
+| Sprint 3 |  | Nothing leaves the machine without passing the privacy gate; analyze a document |
+| Sprint 4 |  | Usable in a browser, with measured quality |
+| Launch |  | Security fixes, docs, deploy guide |
 
 ## Limitations
 

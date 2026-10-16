@@ -1,0 +1,10 @@
+# Normalize line endings: LF in the repository and in the working tree for all text files.
+* text=auto eol=lf
+
+# Shell scripts and the Maven wrapper script must always be LF, or they fail on Linux and macOS.
+*.sh text eol=lf
+mvnw text eol=lf
+
+# Windows scripts must be CRLF.
+*.cmd text eol=crlf
+*.bat text eol=crlf

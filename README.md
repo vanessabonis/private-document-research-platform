@@ -28,6 +28,20 @@ Document text is treated as untrusted input, retrieval is filtered by the permis
 
 Docker Compose, coming in E0-S4.
 
+## Quick start
+
+Requires Java 21 and Docker. All published ports are bound to `127.0.0.1`.
+
+```bash
+cp .env.example .env                  # local-dev placeholders, never commit .env
+docker compose up -d                  # PostgreSQL with pgvector and Ollama
+scripts/pull-embedding-model.sh       # pulls nomic-embed-text, safe to re-run
+./mvnw spring-boot:run                # starts the app on http://127.0.0.1:8080
+curl http://127.0.0.1:8080/actuator/health   # {"components":{"db":{"status":"UP"}},"status":"UP"}
+```
+
+If you change a value in `.env`, export the same variable before running the app. On Apple Silicon, Ollama in Docker runs on CPU only. To use a host Ollama instead, see [ADR-004](docs/adr/ADR-004-ollama-runtime-and-embedding-model.md).
+
 ## Roadmap
 
 The scope, sprints and checklist are in [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md). Summary:

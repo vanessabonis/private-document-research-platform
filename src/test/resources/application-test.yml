@@ -1,0 +1,7 @@
+# Test profile: never needs Docker. The datasource points to a placeholder and nothing connects to it
+# unless a test asks for a connection. Placeholder credentials only.
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    username: test
+    password: test

@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: private-document-research-platform
+  profiles:
+    default: local
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-components: always
+      show-details: never
+      probes:
+        enabled: false
+  # Only the database component is reported. Status only, never details.
+  health:
+    diskspace:
+      enabled: false
+    ping:
+      enabled: false
+    livenessstate:
+      enabled: false
+    readinessstate:
+      enabled: false
+    ssl:
+      enabled: false
+
+---
+# Local development profile (default). Environment variable names match .env.example.
+# The fallback values are local-dev defaults that match .env.example. They are not real secrets.
+# Spring Boot does not read .env: export the variables if you change them there.
+# This profile lives here and not in application-local.yml because that file name is in .gitignore.
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:docresearch}
+    username: ${POSTGRES_USER:docresearch}
+    password: ${POSTGRES_PASSWORD:local_dev_only_change_me}
+
+server:
+  address: 127.0.0.1
+
+app:
+  ollama:
+    # Not used by the application yet (first use is E1-S3). Set to http://localhost:11434 for the
+    # Compose container, or to the same URL for Ollama installed on the host.
+    base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+    embedding-model: ${OLLAMA_EMBEDDING_MODEL:nomic-embed-text}

@@ -71,5 +71,5 @@ When the user asks to fill the log, close the day or update the plan (and only t
    - Fill "Done today", "Decisions" and "Blockers" from the session and the git history.
    - Propose "Tomorrow's slice" from the plan and label it as a proposal.
    - Leave "Hours" for the user. Ask for anything that cannot be known from the code, such as study topic, hours or blockers that are not visible in the repository.
-4. On the last day of a sprint, offer to draft `docs/retros/sprint-N.md` from the retro template in `docs/PROJECT_PLAN.md`.
+4. at the end of a milestone, offer to draft `docs/retros/milestone-N.md` from the retro template in `docs/PROJECT_PLAN.md`.
 5. Show a short summary of the changes. Do not commit unless asked. Remind the user to replace `docs/PROJECT_PLAN.md` in their Claude Project knowledge and to paste the log in the project chat.

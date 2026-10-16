@@ -38,65 +38,23 @@ Multi-tenant SaaS, billing, model fine-tuning, mobile app, real client data, pro
 
 ---
 
-## 3. Process
-
-Lightweight Scrum for a team of one, with Claude as pairing and review partner.
-
-**Hierarchy**
-
-| Level | Meaning | Size |
-|---|---|---|
-| Epic | A capability (E0 to E7) | 1 to 2 sprints |
-| Story | A reviewable outcome with acceptance criteria | 2 to 6 hours |
-| Task | A checklist item inside a story | under 1 hour |
-
-**Priority (MoSCoW):** `[M]` Must, `[S]` Should, `[C]` Could. If behind schedule, cut from the bottom (see section 8).
-
-**Tooling:** GitHub Projects board with columns `Backlog / Sprint / In progress / Review / Done`. Issues labeled `epic:E1`, `priority:must`, etc. One milestone per sprint.
-
-**Cadence:** 1-week sprints starting on Thursdays. Six build days plus one buffer day per sprint.
-
-| Day | What happens |
-|---|---|
-| Day 1 | Sprint planning (30 min): pick stories, confirm acceptance criteria, set the sprint goal |
-| Days 1 to 6 | Daily session (below) |
-| Day 7 | Buffer, review and retro: finish carry-over, record a 2-minute demo, write the retro, rest |
-
-**Daily session (5h)**
-
-| Block | Time | Content |
-|---|---|---|
-| Plan | 0:15 | Review the board, pick today's slice, define "done for today" |
-| Build | 3:30 | Focused work on the current story |
-| Study | 0:45 | Topic from the sprint study list, notes go to `docs/notes/` |
-| Wrap | 0:30 | Commit, update board and this file, fill the daily log, note blockers |
-
-**Definition of Ready:** story has acceptance criteria and an estimate. Acceptance criteria are tracked as nested checkboxes under each story and mirror the GitHub issue. Sprint 1 criteria are written below; criteria for later sprints are written at sprint planning on Day 1 of each sprint.
-
-**Definition of Done**
-
-- [ ] Merged to `main` through a pull request (self-review counts)
-- [ ] Tests cover the core logic
-- [ ] CI is green
-- [ ] Docs updated if behavior changed
-- [ ] No secrets, no real data
-- [ ] Board and this file updated
-
-**Conventions:** Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`, `chore:`), branches named `feat/E2-S3-hybrid-search`, small PRs.
-
-**Daily check-in with Claude:** paste your daily log (template in section 9). Claude helps with planning, design review, code review, unblocking and documentation. Claude does not see your repo, so paste the code or errors that matter.
+## 3. Process (changes)
+- No fixed calendar: this is a hobby project. Work flows by priority.
+- WIP limit of 1: one story and one open branch at a time.
+- A work day keeps the Plan / Build / Study / Wrap format, with hours chosen per day.
+- Retro at each milestone instead of each sprint.
+- Milestones replace sprints. Each one must be demonstrable in 2 minutes.
 
 ---
 
-## 4. Calendar
-
-| Sprint | Dates | Goal |
-|---|---|---|
-| Sprint 1 | Oct 1 to 7 | Ingest a document and find it through the database |
-| Sprint 2 | Oct 8 to 14 | Ask a question and get a cited answer through the API |
-| Sprint 3 | Oct 15 to 21 | Nothing leaves the machine without passing the privacy gate; analyze a document |
-| Sprint 4 | Oct 22 to 28 | Usable in a browser, with measured quality |
-| Launch | Oct 29 to 31 | Security fixes, docs, deploy guide, career packaging |
+## 4. Milestones
+| Milestone | Goal | Stories |
+| --- | --- | --- |
+| M1 Ingest | One PDF ingested and retrievable by a SQL query | E0-S3 (reduced), E1-S1 to E1-S4 |
+| M2 Ask | `POST /ask` returns an answer with verifiable citations | E2-S1 to E2-S6 |
+| M3 Egress (minimum showable) | Nothing leaves the machine without passing the gateway, audit log proves it. README and a short video | E3-S1 to E3-S4, E3-S6, E3-S7 |
+| M4 Use | Both workflows work in the browser, quality measured | E3-S5, E4, E5, E6-S1 to E6-S3 |
+| M5 Launch | Security review, docs, deploy guide, packaging | E6-S4 to E6-S7, E7 |
 
 Capacity per sprint: about 21h of build, 6h of study, 3h planning and 3h wrap-up (about 33h with the buffer day not counted).
 
@@ -123,29 +81,11 @@ Capacity per sprint: about 21h of build, 6h of study, 3h planning and 3h wrap-up
 
 **Study (about 6h):** RAG fundamentals, embeddings and chunking strategies, pgvector and PostgreSQL full-text search, Spring AI overview.
 
-- [ ] **E0-S1 [M] Repo and governance (1.5h):** repo created, LICENSE, README skeleton, issue and PR templates, board, labels
-    - [ ] Repository created with README skeleton
-    - [ ] License decision recorded (ADR-003) and LICENSE added
-    - [ ] Issue and PR templates in .github/
-    - [ ] Board and labels set up
-- [ ] **E0-S2 [M] Scope and ADRs (2h):** one-page scope (problem, 2 workflows, non-goals); ADR-001 local hybrid retrieval with external LLM only for generation; ADR-002 domain and corpus choice (legal-style, financial regulation or health, all public); ADR-003 license
-    - [ ] docs/SCOPE.md with problem, 2 workflows and non-goals
-    - [ ] ADR-001: local hybrid retrieval, external LLM only for generation
-    - [ ] ADR-002: domain and corpus choice
-    - [ ] ADR-003: license
-- [ ] **E0-S3 [M] Corpus (1.5h):** 20 to 50 public documents, `samples/` folder, `SOURCES.md` with URL and license of each
-    - [ ] 20 to 50 public documents in samples/
-    - [ ] SOURCES.md with URL and license of each document
-    - [ ] No private or employer data
-- [ ] **E0-S4 [M] Dev environment (4h):** Docker Compose with PostgreSQL + pgvector and Ollama, embedding model pulled, Spring Boot skeleton with health endpoint, config profiles
-    - [ ] docker compose up starts PostgreSQL with pgvector
-    - [ ] Ollama running with an embedding model pulled
-    - [ ] Spring Boot app starts and exposes a health endpoint
-    - [ ] Config profiles for local and test
-- [ ] **E0-S5 [M] CI and security baseline (2h):** GitHub Actions build and test, Dependabot, secret scanning, CodeQL
-    - [ ] GitHub Actions builds and tests on every push and pull request
-    - [ ] Dependabot enabled
-    - [ ] Secret scanning and CodeQL enabled where available
+- [x] **E0-S1 \[M\] Repo and governance (1.5h):** repo created, LICENSE, README skeleton, issue and PR templates, board, labels
+- [x] **E0-S2 \[M\] Scope and ADRs (2h):** one-page scope; ADR-001 local hybrid retrieval; ADR-002 domain and corpus; ADR-003 license
+- [ ] **E0-S3 \[M\] Corpus (1.5h):** reduced first: 3 to 5 public documents to unblock parsing, rest of the corpus (20 to 50) later; `samples/` folder, `SOURCES.md` with URL and license of each
+- [x] **E0-S4 \[M\] Dev environment (4h):** Docker Compose with PostgreSQL + pgvector and Ollama, embedding model pulled, Spring Boot skeleton with health endpoint, config profiles (ADR-004)
+- [x] **E0-S5 \[M\] CI and security baseline (2h):** GitHub Actions build and test, Dependabot, secret scanning, CodeQL
 - [ ] **E1-S1 [M] Parsing (2h):** Apache Tika extraction for PDF, DOCX, TXT with metadata (title, source, page)
     - [ ] Apache Tika extracts text from PDF, DOCX and TXT
     - [ ] Metadata captured: title, source, page

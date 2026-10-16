@@ -20,12 +20,14 @@ Planned stack: Java 21, Spring Boot, Maven, PostgreSQL with pgvector, Ollama (lo
 
 ## Hard rules
 
-- Public or synthetic data only. Never use code, data or material from the user's employer or its clients.
+- Public or synthetic data only. Never use code, data or material from any employer or client of the user.
+- This repository is public and its history is permanent. Nothing committed can be fully removed.
+- Logs, notes and docs (including `docs/log/` and `docs/notes/`) must not mention employers, clients or other private information.
 - No secrets in git. API keys only through environment variables. Never read, print or commit `.env` files.
 - Never put real documents, personal data or API keys in tests, fixtures, logs or examples.
 - Do not log document content, prompts that contain document text, or secrets.
 - Stay in scope. Work only on the story the user names. Do not create files, add dependencies or refactor code that was not requested. Mention out-of-scope ideas instead of implementing them.
-- Do not commit, push or open pull requests unless the user asks.
+- Commit to a story branch and open a pull request only when the user asks. Asking never includes merging.
 
 ## Architecture rules (apply as the code appears)
 
@@ -39,7 +41,11 @@ Planned stack: Java 21, Spring Boot, Maven, PostgreSQL with pgvector, Ollama (lo
 ## Workflow
 
 - Conventional Commits: `feat:`, `fix:`, `docs:`, `test:`, `chore:`.
-- Branches: `feat/E2-S3-hybrid-search` (epic, story, short name). Keep pull requests small.
+- Branches: `<type>/<story-id>-<slug>` created from an up-to-date `main`, where type is `feat`, `fix`, `docs` or `chore` (for example `docs/E0-S2-scope-and-adrs`). One branch and one pull request per story. Keep pull requests small.
+- Never commit or push to `main`. `main` is protected by a ruleset.
+- Never force push, never delete remote branches, never merge a pull request. The maintainer reviews and squash-merges.
+- If a push or command is blocked (ruleset, secret scanning push protection), stop and report. Do not work around it.
+- Pull requests include `Closes #<issue>` in the description.
 - Definition of Done: merged to `main` through a pull request, tests cover the core logic, CI is green, docs updated if behavior changed, no secrets or real data, board and `docs/PROJECT_PLAN.md` updated.
 - Meaningful trade-offs get a short ADR in `docs/adr/` (`ADR-NNN-title.md` with context, decision and consequences). Suggest an ADR whenever a decision deserves one.
 - Before saying work is done, run the build and the tests and report the result. Never claim something works without running it.
